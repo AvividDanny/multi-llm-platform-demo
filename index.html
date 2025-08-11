@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Chat App</title>
+  <link rel="icon" href="data:,"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<section id="chat-app">
+  <div class="chat-container">
+    <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="sidebar-header">
+            <button class="icon-button logo-button" id="sidebar-logo" aria-label="Toggle sidebar">
+              <img src="assets/icon/Hodo Icon.png" alt="Hodo Icon" class="logo">
+            </button>
+            <button class="icon-button" id="sidebar-toggle" aria-label="Toggle sidebar">
+              <img src="assets/icon/dock-to-right.png" alt="Dock to right">
+            </button>
+          </div>
+        <div class="sidebar-tools">
+          <a href="#" id="new-project-btn" class="tool-item">
+            <img src="assets/icon/tab-new.png" alt="New Project Icon">
+            <span>New Project</span>
+          </a>
+          <div class="tool-item search-project-container">
+            <img src="assets/icon/Search.png" alt="Search Project Icon">
+            <input type="text" id="search-project-input" placeholder="Search Project" class="search-project-input">
+            <div class="search-dropdown" id="search-dropdown">
+              <div class="search-results" id="search-results">
+                <!-- Search results will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="divider">
+        <nav class="project-nav">
+          <ul id="project-list"></ul>
+        </nav>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-profile" id="user-profile">
+          <div class="avatar">J</div>
+          <span class="username">Judy</span>
+        </div>
+        
+        <!-- User popup menu -->
+        <div class="user-popup" id="user-popup">
+          <div class="user-popup-header">
+            <img src="assets/icon/user.png" alt="User Icon">
+            <span class="user-email">judy.yang@avividai.com</span>
+          </div>
+          <div class="user-popup-menu">
+            <div class="user-menu-item" data-action="setting">
+              <img src="assets/icon/setting.png" alt="Setting Icon">
+              <span>Setting</span>
+            </div>
+            <div class="user-menu-item" data-action="logout">
+              <img src="assets/icon/logout.png" alt="Logout Icon">
+              <span>Log out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <div class="model-selector" id="model-selector">
+          <img src="assets/icon/GPT.png" alt="GPT Icon" id="current-model-icon">
+          <span id="current-model-name">GPT-4o</span>
+                          <img src="assets/icon/Caret-down.png" alt="Caret down">
+          <div class="model-dropdown" id="model-dropdown">
+            <div class="model-option" data-model="gpt-4o" data-icon="assets/icon/GPT.png">
+              <img src="assets/icon/GPT.png" alt="GPT Icon">
+              <span>GPT-4o</span>
+            </div>
+            <div class="model-option" data-model="gpt-4-turbo" data-icon="assets/icon/GPT.png">
+              <img src="assets/icon/GPT.png" alt="GPT Icon">
+              <span>GPT-4-turbo</span>
+            </div>
+            <div class="model-option" data-model="gpt-3.5-turbo" data-icon="assets/icon/GPT.png">
+              <img src="assets/icon/GPT.png" alt="GPT Icon">
+              <span>GPT-3.5-turbo</span>
+            </div>
+            <div class="model-option" data-model="gemini-1.5-pro" data-icon="assets/icon/Gemini.png">
+              <img src="assets/icon/Gemini.png" alt="Gemini Icon">
+              <span>Gemini 1.5 pro</span>
+            </div>
+            <div class="model-option" data-model="gemini-1.0-pro" data-icon="assets/icon/Gemini.png">
+              <img src="assets/icon/Gemini.png" alt="Gemini Icon">
+              <span>Gemini 1.0 pro</span>
+            </div>
+            <div class="model-option" data-model="claude-3-opus" data-icon="assets/icon/Claude.png">
+              <img src="assets/icon/Claude.png" alt="Claude Icon">
+              <span>Claude 3 Opus</span>
+            </div>
+            <div class="model-option" data-model="claude-3-sonnet" data-icon="assets/icon/Claude.png">
+              <img src="assets/icon/Claude.png" alt="Claude Icon">
+              <span>Claude 3 Sonnet</span>
+            </div>
+            <div class="model-option" data-model="claude-3-haiku" data-icon="assets/icon/Claude.png">
+              <img src="assets/icon/Claude.png" alt="Claude Icon">
+              <span>Claude 3 Haiku</span>
+            </div>
+            <div class="model-option" data-model="mistral-large" data-icon="assets/icon/Mistral.png">
+              <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+              <span>Mistral Large</span>
+            </div>
+            <div class="model-option" data-model="mistral-medium" data-icon="assets/icon/Mistral.png">
+              <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+              <span>Mistral Medium</span>
+            </div>
+            <div class="model-option" data-model="mistral-small" data-icon="assets/icon/Mistral.png">
+              <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+              <span>Mistral Small</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-search-container">
+          <button class="icon-button" id="chat-search-btn">
+            <img src="assets/icon/Search.png" alt="Search">
+          </button>
+          <div class="chat-search-dropdown" id="chat-search-dropdown">
+            <div class="chat-search-input-wrapper">
+              <input type="text" id="chat-search-input" placeholder="Search messages in this project" class="chat-search-input">
+            </div>
+            <div class="chat-search-results" id="chat-search-results">
+              <!-- Search results will be populated here -->
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="chat-area">
+        <div class="chat-log" id="chat-log">
+          <!-- Messages will be dynamically added here -->
+        </div>
+      </div>
+
+      <footer class="chat-input-area">
+        <form class="chat-input-form" id="chat-form">
+          <textarea placeholder="Ask me anything !" id="prompt" rows="1"></textarea>
+          <div class="input-toolbar">
+            <div class="toolbar-left">
+              <button type="button" class="icon-button toolbar-button show-hover-label add-button" aria-label="Upload Media File">
+                <span class="icon-wrap">
+                  <img src="assets/btn/Add_Default.png" alt="Add">
+                </span>
+                <span class="hover-label">Upload Media File</span>
+              </button>
+              <input type="file" id="file-upload" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt" style="display: none;" multiple>
+            </div>
+            <div class="toolbar-right">
+              <button type="button" class="icon-button toolbar-button show-hover-label" aria-label="Microphone">
+                <span class="icon-wrap">
+                  <img src="assets/btn/Microphone_Default.png?v=2" alt="Microphone">
+                </span>
+                <span class="hover-label">Dictation</span>
+              </button>
+              <div class="send-button-wrapper" id="send" aria-label="Send">
+                <img class="send-icon" src="assets/btn/Send_Default.png" alt="Send icon">
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        <!-- Voice dictation interface (replaces the form when active) -->
+        <div class="voice-dictation-interface" id="voice-dictation-interface">
+          <button class="voice-cancel-btn" id="voice-cancel-btn" aria-label="Cancel">
+            <img src="assets/btn/close.png" alt="Cancel">
+          </button>
+          <div class="voice-status">
+            <div class="voice-icon" id="listen-animation">
+              <img src="assets/icon/listen.png" alt="Listen" id="listen-static-icon">
+            </div>
+            <span class="voice-text">Listening</span>
+          </div>
+          <button class="voice-confirm-btn" id="voice-confirm-btn" aria-label="Confirm">
+            <img src="assets/btn/Done.png" alt="Confirm">
+          </button>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="settings-modal" aria-hidden="true">
+    <div class="settings-modal-content">
+      <div class="settings-sidebar">
+        <button class="settings-close" id="settings-close" aria-label="Close">
+          <img src="assets/icon/close.png" alt="Close">
+        </button>
+        
+        <nav class="settings-nav">
+          <button class="settings-nav-item active" data-tab="account">
+            <img src="assets/icon/user 2.png" alt="Account">
+            <span>Account</span>
+          </button>
+          <button class="settings-nav-item" data-tab="language">
+            <img src="assets/icon/Language.png" alt="Language">
+            <span>Language</span>
+          </button>
+          <button class="settings-nav-item" data-tab="model">
+            <img src="assets/icon/model.png" alt="Prefer model">
+            <span>Prefer model</span>
+          </button>
+          <button class="settings-nav-item" data-tab="data">
+            <img src="assets/icon/Data.png" alt="Data governance">
+            <span>Data governance</span>
+          </button>
+        </nav>
+      </div>
+      
+      <div class="settings-main">
+        <!-- Account Tab -->
+        <div class="settings-tab active" id="tab-account">
+          <h2>Account</h2>
+          <div class="settings-section">
+            <div class="user-info-card">
+              <div class="user-avatar-large">J</div>
+              <div class="user-details">
+                <h3>Judy Yang</h3>
+                <p>judy.yang@avividai.com</p>
+              </div>
+              <button class="edit-btn">
+                <img src="assets/icon/rename.png" alt="Edit">
+              </button>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-row">
+              <span>Change password</span>
+              <button class="btn-change">Change</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Language Tab -->
+        <div class="settings-tab" id="tab-language">
+          <h2>Language</h2>
+          <div class="settings-section">
+            <div class="settings-row">
+              <span>Language</span>
+              <div class="settings-language-selector" id="settings-language-selector">
+                <span id="settings-current-language">English</span>
+                <img src="assets/icon/Caret-down.png" alt="Caret down">
+                <div class="language-dropdown" id="settings-language-dropdown">
+                  <div class="language-option" data-lang="en">
+                    <span>English</span>
+                    <img src="assets/icon/check.png" alt="Selected" class="check-icon" style="display: none;">
+                  </div>
+                  <div class="language-option" data-lang="zh">
+                    <span>中文（繁體）</span>
+                    <img src="assets/icon/check.png" alt="Selected" class="check-icon" style="display: none;">
+                  </div>
+                  <div class="language-option" data-lang="ja">
+                    <span>日本語</span>
+                    <img src="assets/icon/check.png" alt="Selected" class="check-icon" style="display: none;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Prefer Model Tab -->
+        <div class="settings-tab" id="tab-model">
+          <h2>Prefer model</h2>
+          <div class="settings-section">
+            <div class="settings-row">
+              <span>Default model</span>
+              <div class="settings-model-selector" id="settings-model-selector">
+                <img src="assets/icon/GPT.png" alt="GPT Icon" id="settings-current-model-icon">
+                <span id="settings-current-model-name">GPT-4o</span>
+                <img src="assets/icon/Caret-down.png" alt="Caret down">
+                <div class="model-dropdown" id="settings-model-dropdown">
+                  <div class="model-option" data-model="gpt-4o" data-icon="assets/icon/GPT.png">
+                    <img src="assets/icon/GPT.png" alt="GPT Icon">
+                    <span>GPT-4o</span>
+                  </div>
+                  <div class="model-option" data-model="gpt-4-turbo" data-icon="assets/icon/GPT.png">
+                    <img src="assets/icon/GPT.png" alt="GPT Icon">
+                    <span>GPT-4-turbo</span>
+                  </div>
+                  <div class="model-option" data-model="gpt-3.5-turbo" data-icon="assets/icon/GPT.png">
+                    <img src="assets/icon/GPT.png" alt="GPT Icon">
+                    <span>GPT-3.5-turbo</span>
+                  </div>
+                  <div class="model-option" data-model="gemini-1.5-pro" data-icon="assets/icon/Gemini.png">
+                    <img src="assets/icon/Gemini.png" alt="Gemini Icon">
+                    <span>Gemini 1.5 pro</span>
+                  </div>
+                  <div class="model-option" data-model="gemini-1.0-pro" data-icon="assets/icon/Gemini.png">
+                    <img src="assets/icon/Gemini.png" alt="Gemini Icon">
+                    <span>Gemini 1.0 pro</span>
+                  </div>
+                  <div class="model-option" data-model="claude-3-opus" data-icon="assets/icon/Claude.png">
+                    <img src="assets/icon/Claude.png" alt="Claude Icon">
+                    <span>Claude 3 Opus</span>
+                  </div>
+                  <div class="model-option" data-model="claude-3-sonnet" data-icon="assets/icon/Claude.png">
+                    <img src="assets/icon/Claude.png" alt="Claude Icon">
+                    <span>Claude 3 Sonnet</span>
+                  </div>
+                  <div class="model-option" data-model="claude-3-haiku" data-icon="assets/icon/Claude.png">
+                    <img src="assets/icon/Claude.png" alt="Claude Icon">
+                    <span>Claude 3 Haiku</span>
+                  </div>
+                  <div class="model-option" data-model="mistral-large" data-icon="assets/icon/Mistral.png">
+                    <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+                    <span>Mistral Large</span>
+                  </div>
+                  <div class="model-option" data-model="mistral-medium" data-icon="assets/icon/Mistral.png">
+                    <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+                    <span>Mistral Medium</span>
+                  </div>
+                  <div class="model-option" data-model="mistral-small" data-icon="assets/icon/Mistral.png">
+                    <img src="assets/icon/Mistral.png" alt="Mistral Icon">
+                    <span>Mistral Small</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Data Governance Tab -->
+        <div class="settings-tab" id="tab-data">
+          <h2>Data governance</h2>
+          <div class="settings-section">
+            <div class="settings-row">
+              <span>Archived projects</span>
+              <button class="btn-manage">Manage</button>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-row">
+              <span>Archive all project</span>
+              <button class="btn-archive-all">Archive All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global modal overlay -->
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true"></div>
+
+  <!-- Change Password Modal -->
+  <div id="change-password-modal" class="cp-modal" aria-hidden="true">
+    <div class="cp-dialog" role="dialog" aria-modal="true" aria-labelledby="cp-title">
+      <h3 id="cp-title">Change your password</h3>
+      <form id="cp-form" class="cp-form" novalidate>
+        <label for="cp-current" class="cp-label">Current Password</label>
+        <div class="cp-input">
+          <input type="password" id="cp-current" class="cp-field" placeholder="Enter your current password" autocomplete="current-password" required>
+          <button type="button" class="cp-toggle" data-target="cp-current" aria-label="Toggle visibility"><img src="assets/icon/Eye.png" alt="toggle"></button>
+        </div>
+
+        <label for="cp-new" class="cp-label">New Password</label>
+        <div class="cp-input">
+          <input type="password" id="cp-new" class="cp-field" placeholder="Create a new password" autocomplete="new-password" required>
+          <button type="button" class="cp-toggle" data-target="cp-new" aria-label="Toggle visibility"><img src="assets/icon/Eye.png" alt="toggle"></button>
+        </div>
+
+        <label for="cp-confirm" class="cp-label">Confirm Password</label>
+        <div class="cp-input">
+          <input type="password" id="cp-confirm" class="cp-field" placeholder="Re-enter your new password" autocomplete="new-password" required>
+          <button type="button" class="cp-toggle" data-target="cp-confirm" aria-label="Toggle visibility"><img src="assets/icon/Eye.png" alt="toggle"></button>
+        </div>
+
+        <div class="cp-error" id="cp-error" role="alert" aria-live="assertive" style="display:none;"></div>
+
+        <div class="cp-actions">
+          <button type="submit" id="cp-submit" class="cp-submit">Change password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
